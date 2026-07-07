@@ -9,7 +9,7 @@ export const MODELS: { id: ModelId; label: string; desc: string }[] = [
   { id: "research", label: "DOSEN Research", desc: "Analisis mendalam & referensi" },
 ];
 
-export const CATEGORIES = ["Temukan", "Keuangan", "Kesehatan", "Akademik", "Jurnal"] as const;
+export const CATEGORIES = ["Temukan", "Keuangan", "Kesehatan", "Event", "Jurnal"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
 export type DocKind = "PDF" | "DOCX" | "TXT";
