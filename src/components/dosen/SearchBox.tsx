@@ -52,6 +52,12 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
     });
   };
 
+  const handleAction = (label: string) => {
+    toast.info(`${label} dipilih`, {
+      description: "Fitur ini akan segera tersedia.",
+    });
+  };
+
   const modelLabel = MODELS.find((m) => m.id === model)?.label ?? "DOSEN";
 
   return (
@@ -81,18 +87,22 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
               <Plus className="h-4 w-4" />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-52 rounded-xl">
-            <DropdownMenuItem onSelect={() => handleUpload("PDF")}>
-              <FileText className="h-4 w-4" />
-              <span>Upload PDF</span>
+          <DropdownMenuContent align="start" className="w-56 rounded-xl">
+            <DropdownMenuItem onSelect={() => handleUpload("IMAGE")}>
+              <ImagePlus className="h-4 w-4" />
+              <span>Upload dokumen atau gambar</span>
             </DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => handleUpload("DOCX")}>
-              <FileType className="h-4 w-4" />
-              <span>Upload DOCX</span>
+            <DropdownMenuItem onSelect={() => handleAction("Buat gambar")}>
+              <Wand2 className="h-4 w-4" />
+              <span>Buat gambar</span>
             </DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => handleUpload("TXT")}>
-              <FileCode2 className="h-4 w-4" />
-              <span>Upload TXT</span>
+            <DropdownMenuItem onSelect={() => handleAction("Pencarian di website")}>
+              <Globe className="h-4 w-4" />
+              <span>Pencarian di website</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => handleAction("Riset lebih dalam")}>
+              <BookOpen className="h-4 w-4" />
+              <span>Riset lebih dalam</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
