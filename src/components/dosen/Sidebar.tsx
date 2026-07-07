@@ -1,9 +1,5 @@
 import {
   Plus,
-  Monitor,
-  LayoutGrid,
-  Sparkles,
-  SlidersHorizontal,
   History,
   PanelLeftClose,
   PanelLeftOpen,
@@ -17,10 +13,6 @@ type Item = { key: string; label: string; icon: LucideIcon; primary?: boolean };
 
 const ITEMS: Item[] = [
   { key: "baru", label: "Baru", icon: Plus, primary: true },
-  { key: "computer", label: "Computer", icon: Monitor },
-  { key: "ruang", label: "Ruang", icon: LayoutGrid },
-  { key: "artefak", label: "Artefak", icon: Sparkles },
-  { key: "sesuaikan", label: "Sesuaikan", icon: SlidersHorizontal },
   { key: "riwayat", label: "Riwayat", icon: History },
 ];
 
