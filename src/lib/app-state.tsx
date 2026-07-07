@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 
-export type ChatMode = "cari" | "computer";
+export type ChatMode = "cari";
 export type ModelId = "basic" | "academic" | "research";
 
 export const MODELS: { id: ModelId; label: string; desc: string }[] = [
