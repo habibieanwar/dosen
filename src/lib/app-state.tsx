@@ -1,12 +1,29 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 
 export type ChatMode = "cari";
-export type ModelId = "basic" | "academic" | "research";
+export type ModelId =
+  | "free"
+  | "gpt-5-5"
+  | "gemini-3-5-flash"
+  | "claude-sonnet-4-6"
+  | "claude-opus-4-8"
+  | "deepseek-v4-pro"
+  | "deepseek-v4-flash"
+  | "gpt-4o"
+  | "qwen-3-6-plus"
+  | "qwen-3-7-max";
 
 export const MODELS: { id: ModelId; label: string; desc: string }[] = [
-  { id: "basic", label: "DOSEN Basic", desc: "Cepat untuk pertanyaan umum" },
-  { id: "academic", label: "DOSEN Academic", desc: "Optimal untuk tugas akademik" },
-  { id: "research", label: "DOSEN Research", desc: "Analisis mendalam & referensi" },
+  { id: "free", label: "free", desc: "Model default gratis" },
+  { id: "gpt-5-5", label: "GPT-5.5", desc: "OpenAI GPT-5.5" },
+  { id: "gemini-3-5-flash", label: "Gemini 3.5 Flash", desc: "Google Gemini 3.5 Flash" },
+  { id: "claude-sonnet-4-6", label: "Claude Sonnet 4.6", desc: "Anthropic Claude Sonnet 4.6" },
+  { id: "claude-opus-4-8", label: "Claude Opus 4.8", desc: "Anthropic Claude Opus 4.8" },
+  { id: "deepseek-v4-pro", label: "DeepSeek V4 Pro", desc: "DeepSeek V4 Pro" },
+  { id: "deepseek-v4-flash", label: "DeepSeek V4 Flash", desc: "DeepSeek V4 Flash" },
+  { id: "gpt-4o", label: "GPT-4o", desc: "OpenAI GPT-4o" },
+  { id: "qwen-3-6-plus", label: "Qwen3.6 Plus", desc: "Qwen 3.6 Plus" },
+  { id: "qwen-3-7-max", label: "Qwen3.7 Max", desc: "Qwen 3.7 Max" },
 ];
 
 export const CATEGORIES = ["About", "Keuangan", "Tutorial", "Event", "Jurnal"] as const;
