@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, type KeyboardEvent } from "react";
 import {
   Plus,
-  Search,
   ChevronDown,
   ArrowUp,
   FileText,
@@ -21,7 +20,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
 export function SearchBox({ compact = false }: { compact?: boolean }) {
-  const { mode, setMode, model, setModel, submit, addDoc } = useAppState();
+  const { model, setModel, submit, addDoc } = useAppState();
   const [text, setText] = useState("");
   const taRef = useRef<HTMLTextAreaElement>(null);
 
@@ -97,14 +96,6 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <ModePill
-          active={mode === "cari"}
-          icon={<Search className="h-3.5 w-3.5" />}
-          label="Cari"
-          onClick={() => setMode("cari")}
-          hasChevron
-        />
-
         <div className="ml-auto flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -146,32 +137,3 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
   );
 }
 
-function ModePill({
-  active,
-  icon,
-  label,
-  onClick,
-  hasChevron,
-}: {
-  active: boolean;
-  icon: React.ReactNode;
-  label: string;
-  onClick: () => void;
-  hasChevron?: boolean;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition-colors",
-        active
-          ? "border-foreground bg-foreground text-background"
-          : "border-border text-muted-foreground hover:bg-accent hover:text-foreground",
-      )}
-    >
-      {icon}
-      <span>{label}</span>
-      {hasChevron && <ChevronDown className="h-3.5 w-3.5 opacity-70" />}
-    </button>
-  );
-}
