@@ -91,6 +91,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "DOSEN — Asisten Akademik AI" },
+      { name: "description", content: "DOSEN adalah asisten AI akademik untuk mahasiswa, dosen, dan peneliti — cari referensi, ringkas materi, dan analisis dokumen." },
+      { property: "og:description", content: "DOSEN adalah asisten AI akademik untuk mahasiswa, dosen, dan peneliti — cari referensi, ringkas materi, dan analisis dokumen." },
+      { name: "twitter:description", content: "DOSEN adalah asisten AI akademik untuk mahasiswa, dosen, dan peneliti — cari referensi, ringkas materi, dan analisis dokumen." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6e5ce25f-7573-415e-bc2f-81a1d6e37441/id-preview-0e6fe4e0--11096ede-b4f3-47c0-b860-ac020a935d71.lovable.app-1783450641889.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6e5ce25f-7573-415e-bc2f-81a1d6e37441/id-preview-0e6fe4e0--11096ede-b4f3-47c0-b860-ac020a935d71.lovable.app-1783450641889.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
