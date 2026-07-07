@@ -12,10 +12,7 @@ export function LoginModal() {
 
   return (
     <Dialog open={loginOpen} onOpenChange={setLoginOpen}>
-      <DialogContent
-        showCloseButton
-        className="max-w-md rounded-3xl border-border p-0 sm:max-w-md"
-      >
+      <DialogContent className="max-w-md rounded-3xl border-border p-0 sm:max-w-md">
         <div className="flex flex-col gap-5 p-8">
           <div className="flex flex-col items-center gap-4 text-center">
             <Logo size={44} />
