@@ -1,24 +1,70 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { AppStateProvider, useAppState } from "@/lib/app-state";
+import { AppShell } from "@/components/dosen/AppShell";
+import { SearchBox } from "@/components/dosen/SearchBox";
+import { FeatureCards } from "@/components/dosen/FeatureCards";
+import { ChatView } from "@/components/dosen/ChatView";
+import { DocumentAttachedList } from "@/components/dosen/DocumentAttachedCard";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: IndexPage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function IndexPage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <AppStateProvider>
+      <AppShell>
+        <Home />
+      </AppShell>
+    </AppStateProvider>
+  );
+}
+
+function Home() {
+  const { messages } = useAppState();
+  const hasChat = messages.length > 0;
+
+  if (hasChat) {
+    return (
+      <div className="relative flex min-h-[calc(100vh-57px)] flex-col">
+        <div className="flex-1 px-4 pt-8 md:px-8">
+          <ChatView />
+        </div>
+        <div className="sticky bottom-0 border-t border-border/60 bg-background/85 px-4 py-4 backdrop-blur md:px-8">
+          <div className="mx-auto max-w-3xl">
+            <DocumentAttachedList />
+            <div className="mt-2">
+              <SearchBox compact />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex min-h-[calc(100vh-57px)] items-center justify-center px-4 py-10 md:px-8">
+      <div className="w-full max-w-3xl">
+        <div className="flex flex-col items-center text-center">
+          <h1 className="font-display text-6xl leading-none tracking-tight text-foreground sm:text-7xl md:text-8xl">
+            DOSEN
+          </h1>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Asisten akademik AI untuk mahasiswa, dosen, dan peneliti
+          </p>
+        </div>
+
+        <div className="mt-8">
+          <DocumentAttachedList />
+          <div className="mt-2">
+            <SearchBox />
+          </div>
+        </div>
+
+        <div className="mt-8">
+          <FeatureCards />
+        </div>
+      </div>
     </div>
   );
 }
