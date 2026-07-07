@@ -29,9 +29,6 @@ export function SidebarContent({ collapsed = false }: { collapsed?: boolean }) {
       >
         <Logo size={32} />
         {!collapsed && (
-          <span className="font-display text-2xl tracking-tight">DOSEN</span>
-        )}
-        {!collapsed && (
           <button
             onClick={toggleSidebar}
             aria-label="Tutup sidebar"
