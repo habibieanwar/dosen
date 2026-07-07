@@ -12,7 +12,7 @@ export const MODELS: { id: ModelId; label: string; desc: string }[] = [
 export const CATEGORIES = ["About", "Keuangan", "Tutorial", "Event", "Jurnal"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
-export type DocKind = "PDF" | "DOCX" | "TXT";
+export type DocKind = "PDF" | "DOCX" | "TXT" | "IMAGE";
 export type AttachedDoc = { id: string; name: string; kind: DocKind };
 
 export type ChatMessage = {
