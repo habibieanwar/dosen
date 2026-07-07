@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, type KeyboardEvent } from "react";
 import {
   Plus,
-  Search,
   ChevronDown,
   ArrowUp,
   FileText,
