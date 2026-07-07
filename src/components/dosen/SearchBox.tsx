@@ -3,9 +3,10 @@ import {
   Plus,
   ChevronDown,
   ArrowUp,
-  FileText,
-  FileType,
-  FileCode2,
+  ImagePlus,
+  Wand2,
+  Globe,
+  BookOpen,
   Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
