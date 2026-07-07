@@ -2,7 +2,6 @@ import { useState, useRef, useEffect, type KeyboardEvent } from "react";
 import {
   Plus,
   Search,
-  Monitor,
   ChevronDown,
   ArrowUp,
   FileText,
@@ -104,12 +103,6 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
           label="Cari"
           onClick={() => setMode("cari")}
           hasChevron
-        />
-        <ModePill
-          active={mode === "computer"}
-          icon={<Monitor className="h-3.5 w-3.5" />}
-          label="Computer"
-          onClick={() => setMode("computer")}
         />
 
         <div className="ml-auto flex items-center gap-2">
