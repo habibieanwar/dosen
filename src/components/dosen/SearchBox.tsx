@@ -87,7 +87,7 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
               <Plus className="h-4 w-4" />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-56 rounded-xl">
+          <DropdownMenuContent align="start" className="w-64 rounded-xl">
             <DropdownMenuItem onSelect={() => handleUpload("IMAGE")}>
               <ImagePlus className="h-4 w-4" />
               <span>Upload dokumen atau gambar</span>
