@@ -46,8 +46,8 @@ function Home() {
     <div className="flex min-h-[calc(100vh-57px)] items-center justify-center px-4 py-10 md:px-8">
       <div className="w-full max-w-3xl">
         <div className="flex flex-col items-center text-center">
-          <h1 className="font-display text-6xl leading-none tracking-tight text-foreground sm:text-7xl md:text-8xl">
-            DOSEN
+          <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl">
+            Mau Tanya DOSEN?
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
             Asisten akademik AI untuk mahasiswa, dosen, dan peneliti
