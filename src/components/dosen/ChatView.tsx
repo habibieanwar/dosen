@@ -40,7 +40,7 @@ function AssistantAnswer() {
           mencari referensi akademik.
         </p>
 
-        <div className="mt-4 flex flex-wrap items-center gap-1 border-t border-border pt-3">
+        <div className="mt-4 flex flex-wrap items-center gap-1 pt-3">
           <ActionBtn
             icon={<Copy className="h-3.5 w-3.5" />}
             label="Salin"
