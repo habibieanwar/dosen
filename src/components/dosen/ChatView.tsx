@@ -1,4 +1,4 @@
-import { Copy, ThumbsUp, ThumbsDown, ExternalLink, BookOpen } from "lucide-react";
+import { Copy, ThumbsUp, ThumbsDown, BookOpen } from "lucide-react";
 import { useAppState, type ChatMessage } from "@/lib/app-state";
 import { Logo } from "./Logo";
 import { toast } from "sonner";
@@ -72,30 +72,6 @@ function AssistantAnswer() {
         </div>
       </div>
 
-      <div>
-        <div className="mb-3 flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-          <span>Sumber</span>
-        </div>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-          {SOURCES.map((s, i) => (
-            <a
-              key={s.title}
-              href="#"
-              onClick={(e) => e.preventDefault()}
-              className="group flex flex-col gap-1.5 rounded-2xl border border-border bg-card p-4 transition-colors hover:border-foreground/20"
-            >
-              <div className="flex items-center justify-between text-xs text-muted-foreground">
-                <span>
-                  {i + 1}. {s.domain}
-                </span>
-                <ExternalLink className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
-              </div>
-              <p className="line-clamp-2 text-sm font-medium text-foreground">{s.title}</p>
-              <p className="line-clamp-2 text-xs text-muted-foreground">{s.snippet}</p>
-            </a>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
