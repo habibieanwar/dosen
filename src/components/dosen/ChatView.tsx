@@ -10,7 +10,11 @@ export function ChatView() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 pb-40">
       {messages.map((m) =>
-        m.role === "user" ? <UserBubble key={m.id} message={m} /> : <AssistantAnswer key={m.id} />,
+        m.role === "user" ? (
+          <UserBubble key={m.id} message={m} />
+        ) : (
+          <AssistantAnswer key={m.id} message={m} />
+        ),
       )}
     </div>
   );
@@ -26,18 +30,16 @@ function UserBubble({ message }: { message: ChatMessage }) {
   );
 }
 
-function AssistantAnswer() {
+function AssistantAnswer({ message }: { message: ChatMessage }) {
   return (
     <div className="flex flex-col gap-5">
-
       <div className="rounded-2xl bg-card p-5">
         <div className="mb-3 flex items-center gap-2">
           <Logo size={22} showText={false} />
           <span className="text-sm font-medium text-foreground">DOSEN</span>
         </div>
-        <p className="text-[15px] leading-relaxed text-foreground">
-          DOSEN dapat membantu menjelaskan materi, merangkum dokumen, membuat outline tugas, dan
-          mencari referensi akademik.
+        <p className="text-[15px] leading-relaxed text-foreground whitespace-pre-wrap">
+          {message.content}
         </p>
 
         <div className="mt-4 flex flex-wrap items-center gap-1 pt-3">

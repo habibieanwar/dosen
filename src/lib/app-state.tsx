@@ -254,14 +254,124 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       category,
       setCategory,
       messages,
-      submit: (text) => {
+      submit: async (text) => {
         const trimmed = text.trim();
         if (!trimmed) return;
+
+        const userMsgId = crypto.randomUUID();
+        const assistantMsgId = crypto.randomUUID();
+
+        // 1. Tambahkan pesan user & placeholder loading assistant
         setMessages((prev) => [
           ...prev,
-          { id: crypto.randomUUID(), role: "user", content: trimmed },
-          { id: crypto.randomUUID(), role: "assistant", content: SAMPLE_ANSWER },
+          { id: userMsgId, role: "user", content: trimmed },
+          { id: assistantMsgId, role: "assistant", content: "Sedang merumuskan jawaban..." },
         ]);
+
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
+
+        if (!apiKey) {
+          // Jika API Key kosong, tampilkan panduan pengaturan API Key Gemini
+          setTimeout(() => {
+            setMessages((prev) =>
+              prev.map((m) =>
+                m.id === assistantMsgId
+                  ? {
+                      ...m,
+                      content:
+                        "API Key Gemini belum terpasang di berkas `.env` Anda.\n\n" +
+                        "Silakan ikuti 3 langkah mudah ini untuk mengaktifkannya:\n" +
+                        "1. Dapatkan API Key gratis di Google AI Studio (https://aistudio.google.com)\n" +
+                        "2. Tambahkan baris baru berikut di akhir berkas `.env` Anda:\n" +
+                        "   `VITE_GEMINI_API_KEY=KUNCI_API_GEMINI_ANDA`\n" +
+                        "3. Simpan dan restart dev server Anda.\n\n" +
+                        "Setelah terpasang, Gemini akan langsung menjawab pertanyaan Anda secara interaktif di sini!",
+                    }
+                  : m
+              )
+            );
+          }, 800);
+          return;
+        }
+
+        try {
+          // 2. Lakukan POST request ke Google Gemini API (model gemini-1.5-flash yang stabil)
+          const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    parts: [
+                      {
+                        text: `Anda adalah DOSEN, asisten AI akademik pintar untuk mahasiswa, dosen, dan peneliti. Jawab pertanyaan berikut dengan bahasa Indonesia yang formal, terstruktur, ramah akademis, dan edukatif:\n\n${trimmed}`
+                      }
+                    ]
+                  }
+                ]
+              }),
+            }
+          );
+
+          if (!response.ok) {
+            const errData = await response.json();
+            throw new Error(errData.error?.message || "Gagal memanggil API Gemini");
+          }
+
+          const resData = await response.json();
+          const geminiText = resData.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf, tidak ada jawaban dari Gemini.";
+
+          // 3. Masukkan jawaban riil dari Gemini ke state
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === assistantMsgId
+                ? { ...m, content: geminiText }
+                : m
+            )
+          );
+
+          // 4. Update pemakaian chat (chat_usage) di Supabase dan Admin Local Storage
+          if (user && user.id) {
+            // Kita asumsikan user memiliki database profiles
+            // Di profiles, simpan chat_usage ke Supabase
+            const nextUsage = ((user as any).chat_usage || 0) + 1;
+            
+            setUser((prev) => prev ? { ...prev, chat_usage: nextUsage } as any : null);
+            
+            const { error: dbErr } = await supabase
+              .from("profiles")
+              .update({ chat_usage: nextUsage })
+              .eq("id", user.id);
+
+            if (dbErr) {
+              console.warn("Gagal update chat_usage di Supabase:", dbErr.message);
+            }
+
+            // Sync ke admin local storage
+            const saved = localStorage.getItem("admin_users");
+            if (saved) {
+              const currentList = JSON.parse(saved);
+              const idx = currentList.findIndex((u: any) => u.id === user.id);
+              if (idx > -1) {
+                currentList[idx].usage = nextUsage;
+                localStorage.setItem("admin_users", JSON.stringify(currentList));
+              }
+            }
+          }
+        } catch (err: any) {
+          console.error("Gagal memproses AI response:", err);
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === assistantMsgId
+                ? { ...m, content: `Terjadi kesalahan saat menghubungi Gemini API: ${err.message || err}` }
+                : m
+            )
+          );
+        }
       },
       resetChat: () => setMessages([]),
       docs,
