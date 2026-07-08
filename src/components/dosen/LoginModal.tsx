@@ -29,13 +29,6 @@ export function LoginModal() {
               <GoogleIcon />
               Lanjutkan dengan Google
             </Button>
-            <Button
-              variant="secondary"
-              className="h-11 w-full rounded-full border border-border"
-            >
-              <AppleIcon />
-              Lanjutkan dengan Apple
-            </Button>
           </div>
 
           <div className="flex items-center gap-3">
@@ -77,10 +70,3 @@ function GoogleIcon() {
   );
 }
 
-function AppleIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden fill="currentColor">
-      <path d="M16.365 1.43c0 1.14-.42 2.23-1.11 3.03-.74.87-1.94 1.55-3.11 1.46-.13-1.12.41-2.29 1.09-3.03.74-.83 2.04-1.44 3.13-1.46zM20.5 17.29c-.55 1.27-.82 1.84-1.53 2.96-.99 1.57-2.39 3.53-4.13 3.54-1.55.02-1.95-1.01-4.06-1-2.11.01-2.55 1.02-4.1 1-1.74-.02-3.06-1.79-4.05-3.36C.03 16.7-.28 11.6 2.19 8.91c1.22-1.34 3.14-2.19 4.85-2.19 1.75 0 2.85.99 4.29.99 1.4 0 2.25-.99 4.27-.99 1.53 0 3.15.83 4.31 2.28-3.79 2.08-3.17 7.5.59 8.29z" />
-    </svg>
-  );
-}
