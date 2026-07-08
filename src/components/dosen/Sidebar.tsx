@@ -29,13 +29,16 @@ export function SidebarContent({ collapsed = false }: { collapsed?: boolean }) {
       >
         <Logo size={32} />
         {!collapsed && (
-          <button
-            onClick={toggleSidebar}
-            aria-label="Tutup sidebar"
-            className="ml-auto grid h-8 w-8 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
-          >
-            <PanelLeftClose className="h-4 w-4" />
-          </button>
+          <>
+            <span className="font-display text-lg tracking-tight">dosen</span>
+            <button
+              onClick={toggleSidebar}
+              aria-label="Tutup sidebar"
+              className="ml-auto grid h-8 w-8 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
+            >
+              <PanelLeftClose className="h-4 w-4" />
+            </button>
+          </>
         )}
       </div>
 
