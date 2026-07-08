@@ -17,7 +17,7 @@ const ITEMS: Item[] = [
 ];
 
 export function SidebarContent({ collapsed = false }: { collapsed?: boolean }) {
-  const { toggleSidebar, resetChat } = useAppState();
+  const { toggleSidebar, resetChat, setLoginOpen } = useAppState();
 
   return (
     <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground">
@@ -79,9 +79,12 @@ export function SidebarContent({ collapsed = false }: { collapsed?: boolean }) {
 
       <div className="mt-auto p-4">
         {!collapsed && (
-          <div className="rounded-xl border border-sidebar-border bg-background/50 p-3 text-center">
-            <p className="text-xs font-medium text-foreground">Masuk</p>
-          </div>
+          <button
+            onClick={() => setLoginOpen(true)}
+            className="w-full rounded-xl bg-black p-3 text-center text-xs font-medium text-white transition-colors hover:bg-neutral-900 hover:shadow-lg hover:shadow-black/25"
+          >
+            Masuk
+          </button>
         )}
       </div>
     </div>
