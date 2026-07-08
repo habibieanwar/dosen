@@ -101,10 +101,6 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
               <Globe className="h-4 w-4" />
               <span>Pencarian di website</span>
             </DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => handleAction("Riset lebih dalam")}>
-              <BookOpen className="h-4 w-4" />
-              <span>Riset lebih dalam</span>
-            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
