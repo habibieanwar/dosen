@@ -28,7 +28,7 @@ export function TopBar() {
               className={cn(
                 "shrink-0 rounded-full px-3.5 py-1.5 text-sm transition-colors",
                 active
-                  ? "bg-foreground text-background"
+                  ? "bg-white text-foreground border border-border shadow-sm"
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
