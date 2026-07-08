@@ -30,7 +30,7 @@ function AssistantAnswer() {
   return (
     <div className="flex flex-col gap-5">
 
-      <div className="rounded-2xl border border-border bg-card p-5">
+      <div className="rounded-2xl bg-card p-5">
         <div className="mb-3 flex items-center gap-2">
           <Logo size={22} showText={false} />
           <span className="text-sm font-medium text-foreground">DOSEN</span>
