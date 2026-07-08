@@ -44,11 +44,41 @@ function AssistantAnswer() {
           mencari referensi akademik.
         </p>
 
-        <div className="mt-4 flex items-center gap-1 border-t border-border pt-3">
+        <div className="mt-4 flex flex-wrap items-center gap-1 border-t border-border pt-3">
           <ActionBtn
             icon={<Copy className="h-3.5 w-3.5" />}
             label="Salin"
             onClick={() => toast.success("Disalin ke clipboard")}
+          />
+          <ActionBtn
+            icon={<ThumbsUp className="h-3.5 w-3.5" />}
+            label="Suka"
+            onClick={() => toast.success("Terima kasih atas umpan balik Anda")}
+          />
+          <ActionBtn
+            icon={<ThumbsDown className="h-3.5 w-3.5" />}
+            label="Tidak suka"
+            onClick={() => toast.success("Terima kasih atas umpan balik Anda")}
+          />
+          <ActionBtn
+            icon={<Share2 className="h-3.5 w-3.5" />}
+            label="Bagikan"
+            onClick={() => toast.success("Tautan disalin")}
+          />
+          <ActionBtn
+            icon={<RefreshCw className="h-3.5 w-3.5" />}
+            label="Coba lagi"
+            onClick={() => toast.info("Membuat ulang jawaban…")}
+          />
+          <ActionBtn
+            icon={<FileText className="h-3.5 w-3.5" />}
+            label="Word"
+            onClick={() => toast.info("Mengekspor ke Word…")}
+          />
+          <ActionBtn
+            icon={<FileDown className="h-3.5 w-3.5" />}
+            label="PDF"
+            onClick={() => toast.info("Mengekspor ke PDF…")}
           />
         </div>
       </div>
