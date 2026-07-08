@@ -18,8 +18,8 @@ export function ChatView() {
 
 function UserBubble({ message }: { message: ChatMessage }) {
   return (
-    <div>
-      <h2 className="font-display text-2xl leading-tight text-foreground sm:text-3xl">
+    <div className="flex justify-end">
+      <h2 className="max-w-[80%] rounded-2xl bg-accent px-4 py-3 text-right font-display text-2xl leading-tight text-foreground sm:text-3xl">
         {message.content}
       </h2>
     </div>
