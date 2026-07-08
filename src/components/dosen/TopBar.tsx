@@ -40,9 +40,8 @@ export function TopBar() {
       </nav>
 
       <Button
-        variant="outline"
         size="sm"
-        className="shrink-0 rounded-full border-border"
+        className="shrink-0 rounded-full bg-foreground text-background hover:bg-foreground/90"
         onClick={() => setLoginOpen(true)}
       >
         Masuk
