@@ -26,7 +26,7 @@ export const MODELS: { id: ModelId; label: string; desc: string }[] = [
   { id: "qwen-3-7-max", label: "Qwen3.7 Max", desc: "Qwen 3.7 Max" },
 ];
 
-export const CATEGORIES = ["About", "Panduan", "Journals", "Event", "Harga"] as const;
+export const CATEGORIES = ["About", "Panduan", "Journals", "Event"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
 export type DocKind = "PDF" | "DOCX" | "TXT" | "IMAGE";
