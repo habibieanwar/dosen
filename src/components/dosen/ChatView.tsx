@@ -3,23 +3,6 @@ import { useAppState, type ChatMessage } from "@/lib/app-state";
 import { Logo } from "./Logo";
 import { toast } from "sonner";
 
-const SOURCES = [
-  {
-    title: "Panduan Metode Penelitian Kualitatif",
-    domain: "jurnal.ac.id",
-    snippet: "Kerangka dasar untuk merancang studi kualitatif di bidang sosial dan humaniora.",
-  },
-  {
-    title: "Teknik Menyusun Outline Karya Ilmiah",
-    domain: "repositori.kampus.id",
-    snippet: "Struktur outline yang efektif untuk skripsi, tesis, dan artikel jurnal.",
-  },
-  {
-    title: "Referensi Sitasi Akademik Modern",
-    domain: "scholar.example.org",
-    snippet: "Standar sitasi APA, MLA, dan IEEE untuk kebutuhan publikasi ilmiah.",
-  },
-];
 
 export function ChatView() {
   const { messages } = useAppState();
