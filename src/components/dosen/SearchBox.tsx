@@ -16,7 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MODELS, useAppState, type DocKind } from "@/lib/app-state";
+import { FEATURES, MODELS, useAppState, type DocKind } from "@/lib/app-state";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
