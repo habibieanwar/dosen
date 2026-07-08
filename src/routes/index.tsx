@@ -1,21 +1,29 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { AppStateProvider, useAppState } from "@/lib/app-state";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useAppState } from "@/lib/app-state";
 import { AppShell } from "@/components/dosen/AppShell";
 import { SearchBox } from "@/components/dosen/SearchBox";
 import { ChatView } from "@/components/dosen/ChatView";
 import { DocumentAttachedList } from "@/components/dosen/DocumentAttachedCard";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/")({
   component: IndexPage,
 });
 
 function IndexPage() {
+  const { user } = useAppState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user && !user.isProfileCompleted) {
+      navigate({ to: "/lengkapi-profil", replace: true });
+    }
+  }, [user, navigate]);
+
   return (
-    <AppStateProvider>
-      <AppShell>
-        <Home />
-      </AppShell>
-    </AppStateProvider>
+    <AppShell>
+      <Home />
+    </AppShell>
   );
 }
 

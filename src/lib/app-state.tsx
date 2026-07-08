@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
 export type ChatMode = "cari";
 export type ModelId =
@@ -55,6 +55,16 @@ export type ChatMessage = {
   content: string;
 };
 
+export type User = {
+  name: string;
+  email: string;
+  isProfileCompleted: boolean;
+  university?: string;
+  nimOrNip?: string;
+  role?: string;
+  phoneNumber?: string;
+};
+
 type State = {
   sidebarCollapsed: boolean;
   toggleSidebar: () => void;
@@ -63,6 +73,11 @@ type State = {
 
   loginOpen: boolean;
   setLoginOpen: (v: boolean) => void;
+
+  user: User | null;
+  loginWithGoogle: () => void;
+  completeProfile: (data: { university: string; nimOrNip?: string; role: string; phoneNumber?: string }) => void;
+  logout: () => void;
 
   mode: ChatMode;
   setMode: (m: ChatMode) => void;
@@ -100,6 +115,34 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [docs, setDocs] = useState<AttachedDoc[]>([]);
 
+  // Auth State
+  const [user, setUser] = useState<User | null>(null);
+
+  // Safely load user from localStorage on client-side to prevent SSR hydration mismatch
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("dosen_user_session");
+      if (saved) {
+        try {
+          setUser(JSON.parse(saved));
+        } catch (e) {
+          console.error("Failed to parse saved session", e);
+        }
+      }
+    }
+  }, []);
+
+  const saveUser = (u: User | null) => {
+    setUser(u);
+    if (typeof window !== "undefined") {
+      if (u) {
+        localStorage.setItem("dosen_user_session", JSON.stringify(u));
+      } else {
+        localStorage.removeItem("dosen_user_session");
+      }
+    }
+  };
+
   const value = useMemo<State>(
     () => ({
       sidebarCollapsed,
@@ -108,6 +151,28 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       setMobileOpen,
       loginOpen,
       setLoginOpen,
+      user,
+      loginWithGoogle: () => {
+        const mockUser: User = {
+          name: "Budi Akademisi",
+          email: "budi.akademisi@gmail.com",
+          isProfileCompleted: false,
+        };
+        saveUser(mockUser);
+        setLoginOpen(false);
+      },
+      completeProfile: (profileData) => {
+        if (!user) return;
+        const updatedUser = {
+          ...user,
+          ...profileData,
+          isProfileCompleted: true,
+        };
+        saveUser(updatedUser);
+      },
+      logout: () => {
+        saveUser(null);
+      },
       mode,
       setMode,
       model,
@@ -138,7 +203,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
           },
         ]),
     }),
-    [sidebarCollapsed, mobileOpen, loginOpen, mode, model, feature, category, messages, docs],
+    [sidebarCollapsed, mobileOpen, loginOpen, user, mode, model, feature, category, messages, docs],
   );
 
   return <AppStateCtx.Provider value={value}>{children}</AppStateCtx.Provider>;

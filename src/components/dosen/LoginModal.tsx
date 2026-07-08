@@ -3,8 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 import { useAppState } from "@/lib/app-state";
 
+import { useNavigate } from "@tanstack/react-router";
+
 export function LoginModal() {
-  const { loginOpen, setLoginOpen } = useAppState();
+  const { loginOpen, setLoginOpen, loginWithGoogle } = useAppState();
+  const navigate = useNavigate();
+
+  const handleGoogleLogin = () => {
+    loginWithGoogle();
+    navigate({ to: "/lengkapi-profil", replace: true });
+  };
 
   return (
     <Dialog open={loginOpen} onOpenChange={setLoginOpen}>
@@ -20,7 +28,7 @@ export function LoginModal() {
             </div>
           </div>
 
-          <Button className="h-11 w-full rounded-full">
+          <Button onClick={handleGoogleLogin} className="h-11 w-full rounded-full cursor-pointer">
             <GoogleIcon />
             Lanjutkan dengan Google
           </Button>

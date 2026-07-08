@@ -19,7 +19,7 @@ const ITEMS: Item[] = [
 ];
 
 export function SidebarContent({ collapsed = false }: { collapsed?: boolean }) {
-  const { toggleSidebar, resetChat, setLoginOpen } = useAppState();
+  const { toggleSidebar, resetChat, setLoginOpen, user, logout } = useAppState();
 
   return (
     <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground">
@@ -79,14 +79,34 @@ export function SidebarContent({ collapsed = false }: { collapsed?: boolean }) {
         </div>
       )}
 
-      <div className="mt-auto p-4">
-        {!collapsed && (
-          <button
-            onClick={() => setLoginOpen(true)}
-            className="w-full rounded-xl bg-black p-3 text-center text-xs font-medium text-white transition-colors hover:bg-neutral-900 hover:shadow-lg hover:shadow-black/25"
-          >
-            Masuk
-          </button>
+      <div className="mt-auto p-4 flex flex-col gap-2">
+        {user ? (
+          <>
+            {!collapsed && (
+              <div className="flex flex-col gap-1 rounded-xl bg-sidebar-accent p-3 border border-border/40">
+                <p className="truncate text-xs font-semibold text-foreground">{user.name}</p>
+                <p className="truncate text-[10px] text-muted-foreground">{user.email}</p>
+              </div>
+            )}
+            <button
+              onClick={logout}
+              className={cn(
+                "w-full rounded-xl bg-red-600 p-2.5 text-center text-xs font-medium text-white transition-colors hover:bg-red-700 hover:shadow-lg hover:shadow-red-600/25 cursor-pointer",
+                collapsed && "px-1 text-[10px]"
+              )}
+            >
+              {collapsed ? "Keluar" : "Keluar / Logout"}
+            </button>
+          </>
+        ) : (
+          !collapsed && (
+            <button
+              onClick={() => setLoginOpen(true)}
+              className="w-full rounded-xl bg-black p-3 text-center text-xs font-medium text-white transition-colors hover:bg-neutral-900 hover:shadow-lg hover:shadow-black/25 cursor-pointer"
+            >
+              Masuk
+            </button>
+          )
         )}
       </div>
     </div>
