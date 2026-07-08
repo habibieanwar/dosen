@@ -136,7 +136,9 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
           <DropdownMenuTrigger asChild>
             <button className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm bg-black text-white transition-colors hover:bg-black/90">
               <span className="hidden sm:inline">Skill:</span>
-              <span className="font-medium text-white">{modelLabel}</span>
+              <span className="font-medium text-white">
+                {model === "chat-biasa" ? "Free" : modelLabel}
+              </span>
               <ChevronDown className="h-3.5 w-3.5" />
             </button>
           </DropdownMenuTrigger>
