@@ -24,6 +24,25 @@ export const MODELS: { id: ModelId; label: string; desc: string }[] = [
   { id: "qwen-3-7-max", label: "Qwen3.7 Max", desc: "Model unggulan untuk performa tinggi" },
 ];
 
+export type FeatureId =
+  | "auto"
+  | "proposal-penelitian"
+  | "metodologi-penelitian"
+  | "riset-akademik"
+  | "hasil-penelitian"
+  | "pembahasan-penelitian"
+  | "kesimpulan-penelitian";
+
+export const FEATURES: { id: FeatureId; label: string }[] = [
+  { id: "auto", label: "AUTO" },
+  { id: "proposal-penelitian", label: "Proposal Penelitian" },
+  { id: "metodologi-penelitian", label: "Metodologi Penelitian" },
+  { id: "riset-akademik", label: "Riset Akademik" },
+  { id: "hasil-penelitian", label: "Hasil Penelitian" },
+  { id: "pembahasan-penelitian", label: "Pembahasan Penelitian" },
+  { id: "kesimpulan-penelitian", label: "Kesimpulan Penelitian" },
+];
+
 export const CATEGORIES = ["About", "Panduan", "Journals", "Event"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
