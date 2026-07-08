@@ -80,7 +80,7 @@ export function SidebarContent({ collapsed = false }: { collapsed?: boolean }) {
       <div className="mt-auto p-4">
         {!collapsed && (
           <div className="rounded-xl border border-sidebar-border bg-background/50 p-3">
-            <p className="text-xs font-medium text-foreground">DOSEN untuk Akademik</p>
+            <p className="text-xs font-medium text-foreground">DOSEN masuk untuk Akademik</p>
             <p className="mt-1 text-xs text-muted-foreground">
               Riset, tugas, dan referensi lebih cepat.
             </p>
