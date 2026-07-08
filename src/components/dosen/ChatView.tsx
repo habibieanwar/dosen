@@ -1,4 +1,4 @@
-import { Copy, ThumbsUp, ThumbsDown, BookOpen } from "lucide-react";
+import { Copy, BookOpen } from "lucide-react";
 import { useAppState, type ChatMessage } from "@/lib/app-state";
 import { Logo } from "./Logo";
 import { toast } from "sonner";
