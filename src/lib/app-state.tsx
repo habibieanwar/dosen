@@ -33,14 +33,14 @@ export type FeatureId =
   | "pembahasan-penelitian"
   | "kesimpulan-penelitian";
 
-export const FEATURES: { id: FeatureId; label: string }[] = [
-  { id: "auto", label: "AUTO" },
-  { id: "proposal-penelitian", label: "Proposal Penelitian" },
-  { id: "metodologi-penelitian", label: "Metodologi Penelitian" },
-  { id: "riset-akademik", label: "Riset Akademik" },
-  { id: "hasil-penelitian", label: "Hasil Penelitian" },
-  { id: "pembahasan-penelitian", label: "Pembahasan Penelitian" },
-  { id: "kesimpulan-penelitian", label: "Kesimpulan Penelitian" },
+export const FEATURES: { id: FeatureId; label: string; desc: string }[] = [
+  { id: "auto", label: "AUTO", desc: "Pilih respons terbaik secara otomatis" },
+  { id: "proposal-penelitian", label: "Proposal Penelitian", desc: "Susun ide, latar belakang, dan rumusan masalah" },
+  { id: "metodologi-penelitian", label: "Metodologi Penelitian", desc: "Tentukan desain, teknik pengumpulan, dan analisis data" },
+  { id: "riset-akademik", label: "Riset Akademik", desc: "Cari dan rangkum referensi ilmiah" },
+  { id: "hasil-penelitian", label: "Hasil Penelitian", desc: "Susun temuan utama dan interpretasi data" },
+  { id: "pembahasan-penelitian", label: "Pembahasan Penelitian", desc: "Hubungkan hasil dengan teori dan penelitian sebelumnya" },
+  { id: "kesimpulan-penelitian", label: "Kesimpulan Penelitian", desc: "Ringkas jawaban, implikasi, dan rekomendasi" },
 ];
 
 export const CATEGORIES = ["About", "Panduan", "Journals", "Event"] as const;
