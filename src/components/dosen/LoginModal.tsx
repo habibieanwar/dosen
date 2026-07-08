@@ -3,20 +3,23 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 import { useAppState } from "@/lib/app-state";
 
-import { useNavigate } from "@tanstack/react-router";
-
 export function LoginModal() {
-  const { loginOpen, setLoginOpen, loginWithGoogle } = useAppState();
-  const navigate = useNavigate();
+  const { loginWithGoogle, user } = useAppState();
 
   const handleGoogleLogin = () => {
     loginWithGoogle();
-    navigate({ to: "/lengkapi-profil", replace: true });
   };
 
+  // Selama user belum login, paksa modal login selalu terbuka secara permanen
+  const isForcedOpen = !user;
+
   return (
-    <Dialog open={loginOpen} onOpenChange={setLoginOpen}>
-      <DialogContent className="max-w-md rounded-3xl border-border p-0 sm:max-w-md">
+    <Dialog open={isForcedOpen} onOpenChange={() => {}}>
+      <DialogContent 
+        className="max-w-md rounded-3xl border-border p-0 sm:max-w-md [&>button]:hidden"
+        onPointerDownOutside={(e) => e.preventDefault()}
+        onEscapeKeyDown={(e) => e.preventDefault()}
+      >
         <div className="flex flex-col gap-5 p-8">
           <div className="flex flex-col items-center gap-4 text-center">
             <Logo size={44} />

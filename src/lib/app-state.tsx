@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { supabase } from "./supabase";
+import { toast } from "sonner";
 
 export type ChatMode = "cari";
 export type ModelId =
@@ -56,6 +58,7 @@ export type ChatMessage = {
 };
 
 export type User = {
+  id?: string;
   name: string;
   email: string;
   isProfileCompleted: boolean;
@@ -76,7 +79,7 @@ type State = {
 
   user: User | null;
   loginWithGoogle: () => void;
-  completeProfile: (data: { university: string; nimOrNip?: string; role: string; phoneNumber?: string }) => void;
+  completeProfile: (data: { university: string; fullName?: string; nimOrNip?: string; role: string; phoneNumber?: string }) => void;
   logout: () => void;
 
   mode: ChatMode;
@@ -118,30 +121,70 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   // Auth State
   const [user, setUser] = useState<User | null>(null);
 
-  // Safely load user from localStorage on client-side to prevent SSR hydration mismatch
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("dosen_user_session");
-      if (saved) {
-        try {
-          setUser(JSON.parse(saved));
-        } catch (e) {
-          console.error("Failed to parse saved session", e);
-        }
-      }
-    }
-  }, []);
+  // Load profile from Supabase Database
+  const fetchUserProfile = async (userId: string, email: string) => {
+    try {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", userId)
+        .maybeSingle();
 
-  const saveUser = (u: User | null) => {
-    setUser(u);
-    if (typeof window !== "undefined") {
-      if (u) {
-        localStorage.setItem("dosen_user_session", JSON.stringify(u));
+      if (error) throw error;
+
+      if (data) {
+        setUser({
+          id: data.id,
+          email: data.email,
+          name: data.fullname || "User Akademisi",
+          isProfileCompleted: data.is_profile_completed,
+          university: data.university,
+          role: data.role,
+          phoneNumber: data.phone_number,
+        });
       } else {
-        localStorage.removeItem("dosen_user_session");
+        // Fallback jika profile belum terbuat di DB (karena lag sinkronisasi trigger)
+        setUser({
+          id: userId,
+          email: email,
+          name: "User Akademisi",
+          isProfileCompleted: false,
+        });
       }
+    } catch (err) {
+      console.error("Gagal memuat profil database:", err);
     }
   };
+
+  // Listen to Auth changes via Supabase
+  useEffect(() => {
+    // Check active session immediately
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        fetchUserProfile(session.user.id, session.user.email || "");
+      }
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (session?.user) {
+          await fetchUserProfile(session.user.id, session.user.email || "");
+          if (event === "SIGNED_IN") {
+            toast.success("Berhasil masuk dengan Google!");
+          }
+        } else {
+          if (user) {
+            toast.info("Anda telah keluar dari sesi.");
+          }
+          setUser(null);
+        }
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   const value = useMemo<State>(
     () => ({
@@ -152,26 +195,55 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       loginOpen,
       setLoginOpen,
       user,
-      loginWithGoogle: () => {
-        const mockUser: User = {
-          name: "Budi Akademisi",
-          email: "budi.akademisi@gmail.com",
-          isProfileCompleted: false,
-        };
-        saveUser(mockUser);
-        setLoginOpen(false);
+      loginWithGoogle: async () => {
+        try {
+          const { error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+              redirectTo: `${window.location.origin}/`,
+            },
+          });
+          if (error) throw error;
+        } catch (err: any) {
+          console.error("OAuth gagal:", err.message);
+        }
       },
-      completeProfile: (profileData) => {
-        if (!user) return;
-        const updatedUser = {
-          ...user,
-          ...profileData,
-          isProfileCompleted: true,
-        };
-        saveUser(updatedUser);
+      completeProfile: async (profileData) => {
+        if (!user || !user.id) return;
+        try {
+          const { error } = await supabase
+            .from("profiles")
+            .update({
+              fullname: profileData.fullName,
+              university: profileData.university,
+              role: profileData.role,
+              phone_number: profileData.phoneNumber,
+              is_profile_completed: true,
+            })
+            .eq("id", user.id);
+
+          if (error) throw error;
+
+          // Update local state setelah sukses update di Supabase
+          setUser((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  name: profileData.fullName || prev.name,
+                  university: profileData.university,
+                  role: profileData.role,
+                  phoneNumber: profileData.phoneNumber,
+                  isProfileCompleted: true,
+                }
+              : null
+          );
+        } catch (err: any) {
+          console.error("Gagal melengkapi profil:", err.message);
+        }
       },
-      logout: () => {
-        saveUser(null);
+      logout: async () => {
+        await supabase.auth.signOut();
+        setUser(null);
       },
       mode,
       setMode,

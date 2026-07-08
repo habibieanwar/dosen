@@ -9,12 +9,42 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PanduanRouteImport } from './routes/panduan'
 import { Route as LengkapiProfilRouteImport } from './routes/lengkapi-profil'
+import { Route as JournalsRouteImport } from './routes/journals'
+import { Route as EventRouteImport } from './routes/event'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const PanduanRoute = PanduanRouteImport.update({
+  id: '/panduan',
+  path: '/panduan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LengkapiProfilRoute = LengkapiProfilRouteImport.update({
   id: '/lengkapi-profil',
   path: '/lengkapi-profil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalsRoute = JournalsRouteImport.update({
+  id: '/journals',
+  path: '/journals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventRoute = EventRouteImport.update({
+  id: '/event',
+  path: '/event',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +55,114 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/event': typeof EventRoute
+  '/journals': typeof JournalsRoute
   '/lengkapi-profil': typeof LengkapiProfilRoute
+  '/panduan': typeof PanduanRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/event': typeof EventRoute
+  '/journals': typeof JournalsRoute
   '/lengkapi-profil': typeof LengkapiProfilRoute
+  '/panduan': typeof PanduanRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/event': typeof EventRoute
+  '/journals': typeof JournalsRoute
   '/lengkapi-profil': typeof LengkapiProfilRoute
+  '/panduan': typeof PanduanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/lengkapi-profil'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/event'
+    | '/journals'
+    | '/lengkapi-profil'
+    | '/panduan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/lengkapi-profil'
-  id: '__root__' | '/' | '/lengkapi-profil'
+  to:
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/event'
+    | '/journals'
+    | '/lengkapi-profil'
+    | '/panduan'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/event'
+    | '/journals'
+    | '/lengkapi-profil'
+    | '/panduan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
+  EventRoute: typeof EventRoute
+  JournalsRoute: typeof JournalsRoute
   LengkapiProfilRoute: typeof LengkapiProfilRoute
+  PanduanRoute: typeof PanduanRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/panduan': {
+      id: '/panduan'
+      path: '/panduan'
+      fullPath: '/panduan'
+      preLoaderRoute: typeof PanduanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lengkapi-profil': {
       id: '/lengkapi-profil'
       path: '/lengkapi-profil'
       fullPath: '/lengkapi-profil'
       preLoaderRoute: typeof LengkapiProfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journals': {
+      id: '/journals'
+      path: '/journals'
+      fullPath: '/journals'
+      preLoaderRoute: typeof JournalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/event': {
+      id: '/event'
+      path: '/event'
+      fullPath: '/event'
+      preLoaderRoute: typeof EventRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,7 +177,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
+  EventRoute: EventRoute,
+  JournalsRoute: JournalsRoute,
   LengkapiProfilRoute: LengkapiProfilRoute,
+  PanduanRoute: PanduanRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

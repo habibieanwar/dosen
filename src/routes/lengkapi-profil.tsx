@@ -14,6 +14,9 @@ function LengkapiProfilPage() {
   const navigate = useNavigate();
 
   // Form State
+  const [fullName, setFullName] = useState(
+    user?.name && user.name !== "User Akademisi" ? user.name : ""
+  );
   const [university, setUniversity] = useState("");
   const [role, setRole] = useState("mahasiswa");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -41,6 +44,10 @@ function LengkapiProfilPage() {
     e.preventDefault();
 
     // Validasi Input Sisi Klien (Cybersecurity Best Practice: Strict Validation)
+    if (!fullName.trim()) {
+      toast.error("Nama lengkap tidak boleh kosong");
+      return;
+    }
     if (!university.trim()) {
       toast.error("Universitas / Institusi tidak boleh kosong");
       return;
@@ -55,6 +62,7 @@ function LengkapiProfilPage() {
     // Simulasi penyimpanan ke database
     setTimeout(() => {
       completeProfile({
+        fullName: fullName.trim(),
         university: university.trim(),
         role,
         phoneNumber: phoneNumber.trim(),
@@ -116,6 +124,25 @@ function LengkapiProfilPage() {
                   <span className="text-xs">{item.label}</span>
                 </button>
               ))}
+            </div>
+          </div>
+
+          {/* Nama Lengkap */}
+          <div className="space-y-2">
+            <label htmlFor="fullname" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Nama Lengkap
+            </label>
+            <div className="relative">
+              <User className="absolute top-3 left-3 h-5 w-5 text-muted-foreground/75" />
+              <input
+                id="fullname"
+                type="text"
+                required
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Masukkan Nama Lengkap Anda"
+                className="h-11 w-full rounded-2xl border border-border bg-white pl-10 pr-4 text-sm transition-all focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              />
             </div>
           </div>
 
