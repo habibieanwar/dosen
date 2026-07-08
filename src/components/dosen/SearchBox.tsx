@@ -132,32 +132,12 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm bg-black text-white transition-colors hover:bg-black/90">
-              <span className="hidden sm:inline">Skill:</span>
-              <span className="font-medium text-white">
-                {model === "chat-biasa" ? "Free" : modelLabel}
-              </span>
-              <ChevronDown className="h-3.5 w-3.5" />
-            </button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-64 rounded-xl">
-            {MODELS.map((m) => (
-              <DropdownMenuItem
-                key={m.id}
-                onSelect={() => setModel(m.id)}
-                className="flex-col items-start gap-0.5 py-2"
-              >
-                <div className="flex w-full items-center">
-                  <span className="font-medium">{m.label}</span>
-                  {model === m.id && <Check className="ml-auto h-4 w-4" />}
-                </div>
-                <span className="text-xs text-muted-foreground">{m.desc}</span>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <button className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm bg-black text-white transition-colors hover:bg-black/90">
+          <span className="hidden sm:inline">Skill:</span>
+          <span className="font-medium text-white">
+            {model === "chat-biasa" ? "Free" : modelLabel}
+          </span>
+        </button>
 
         <div className="ml-auto flex items-center gap-2">
           <Button
