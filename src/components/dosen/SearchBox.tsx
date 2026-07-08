@@ -16,14 +16,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MODELS, useAppState, type DocKind } from "@/lib/app-state";
+import { FEATURES, MODELS, useAppState, type DocKind } from "@/lib/app-state";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
 export function SearchBox({ compact = false }: { compact?: boolean }) {
-  const { model, setModel, submit, addDoc } = useAppState();
+  const { model, setModel, feature, setFeature, submit, addDoc } = useAppState();
   const [text, setText] = useState("");
   const taRef = useRef<HTMLTextAreaElement>(null);
+
+  const featureLabel = FEATURES.find((f) => f.id === feature)?.label ?? "AUTO";
 
   useEffect(() => {
     const ta = taRef.current;
@@ -107,10 +109,29 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <button className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm bg-black text-white transition-colors hover:bg-black/90">
-          <span className="hidden sm:inline">Fitur:</span>
-          <span className="font-medium text-white">AUTO</span>
-        </button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm bg-black text-white transition-colors hover:bg-black/90">
+              <span className="hidden sm:inline">Fitur:</span>
+              <span className="font-medium text-white">{featureLabel}</span>
+              <ChevronDown className="h-3.5 w-3.5" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="w-64 rounded-xl">
+            {FEATURES.map((f) => (
+              <DropdownMenuItem
+                key={f.id}
+                onSelect={() => setFeature(f.id)}
+                className="flex-col items-start gap-0.5 py-2"
+              >
+                <div className="flex w-full items-center">
+                  <span className="font-medium">{f.label}</span>
+                  {feature === f.id && <Check className="ml-auto h-4 w-4" />}
+                </div>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

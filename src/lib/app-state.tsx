@@ -24,6 +24,25 @@ export const MODELS: { id: ModelId; label: string; desc: string }[] = [
   { id: "qwen-3-7-max", label: "Qwen3.7 Max", desc: "Model unggulan untuk performa tinggi" },
 ];
 
+export type FeatureId =
+  | "auto"
+  | "proposal-penelitian"
+  | "metodologi-penelitian"
+  | "riset-akademik"
+  | "hasil-penelitian"
+  | "pembahasan-penelitian"
+  | "kesimpulan-penelitian";
+
+export const FEATURES: { id: FeatureId; label: string }[] = [
+  { id: "auto", label: "AUTO" },
+  { id: "proposal-penelitian", label: "Proposal Penelitian" },
+  { id: "metodologi-penelitian", label: "Metodologi Penelitian" },
+  { id: "riset-akademik", label: "Riset Akademik" },
+  { id: "hasil-penelitian", label: "Hasil Penelitian" },
+  { id: "pembahasan-penelitian", label: "Pembahasan Penelitian" },
+  { id: "kesimpulan-penelitian", label: "Kesimpulan Penelitian" },
+];
+
 export const CATEGORIES = ["About", "Panduan", "Journals", "Event"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
@@ -51,6 +70,9 @@ type State = {
   model: ModelId;
   setModel: (m: ModelId) => void;
 
+  feature: FeatureId;
+  setFeature: (f: FeatureId) => void;
+
   category: Category;
   setCategory: (c: Category) => void;
 
@@ -73,6 +95,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const [loginOpen, setLoginOpen] = useState(false);
   const [mode, setMode] = useState<ChatMode>("cari");
   const [model, setModel] = useState<ModelId>("gpt-5-5");
+  const [feature, setFeature] = useState<FeatureId>("auto");
   const [category, setCategory] = useState<Category>("About");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [docs, setDocs] = useState<AttachedDoc[]>([]);
@@ -89,6 +112,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       setMode,
       model,
       setModel,
+      feature,
+      setFeature,
       category,
       setCategory,
       messages,
@@ -113,7 +138,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
           },
         ]),
     }),
-    [sidebarCollapsed, mobileOpen, loginOpen, mode, model, category, messages, docs],
+    [sidebarCollapsed, mobileOpen, loginOpen, mode, model, feature, category, messages, docs],
   );
 
   return <AppStateCtx.Provider value={value}>{children}</AppStateCtx.Provider>;
