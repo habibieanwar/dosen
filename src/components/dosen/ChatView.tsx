@@ -99,10 +99,11 @@ function ActionBtn({
   return (
     <button
       onClick={onClick}
-      className="flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+      aria-label={label}
+      title={label}
+      className="grid h-8 w-8 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
     >
       {icon}
-      <span>{label}</span>
     </button>
   );
 }
