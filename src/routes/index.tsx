@@ -29,7 +29,7 @@ function Home() {
         <div className="flex-1 px-4 pt-8 md:px-8">
           <ChatView />
         </div>
-        <div className="sticky bottom-0 border-t border-border/60 bg-background/85 px-4 py-4 backdrop-blur md:px-8">
+        <div className="sticky bottom-0 border-t border-border/60 bg-[#FFFFFF] px-4 py-4 md:px-8">
           <div className="mx-auto max-w-3xl">
             <DocumentAttachedList />
             <div className="mt-2">
