@@ -50,8 +50,6 @@ function AssistantAnswer() {
             label="Salin"
             onClick={() => toast.success("Disalin ke clipboard")}
           />
-          <ActionBtn icon={<ThumbsUp className="h-3.5 w-3.5" />} label="Suka" />
-          <ActionBtn icon={<ThumbsDown className="h-3.5 w-3.5" />} label="Tidak suka" />
         </div>
       </div>
 
