@@ -95,6 +95,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const [loginOpen, setLoginOpen] = useState(false);
   const [mode, setMode] = useState<ChatMode>("cari");
   const [model, setModel] = useState<ModelId>("gpt-5-5");
+  const [feature, setFeature] = useState<FeatureId>("auto");
   const [category, setCategory] = useState<Category>("About");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [docs, setDocs] = useState<AttachedDoc[]>([]);
