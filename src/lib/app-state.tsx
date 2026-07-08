@@ -112,6 +112,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       setMode,
       model,
       setModel,
+      feature,
+      setFeature,
       category,
       setCategory,
       messages,
