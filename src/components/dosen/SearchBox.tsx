@@ -21,9 +21,11 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
 export function SearchBox({ compact = false }: { compact?: boolean }) {
-  const { model, setModel, submit, addDoc } = useAppState();
+  const { model, setModel, feature, setFeature, submit, addDoc } = useAppState();
   const [text, setText] = useState("");
   const taRef = useRef<HTMLTextAreaElement>(null);
+
+  const featureLabel = FEATURES.find((f) => f.id === feature)?.label ?? "AUTO";
 
   useEffect(() => {
     const ta = taRef.current;
