@@ -2,16 +2,26 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from "re
 
 export type ChatMode = "cari";
 export type ModelId =
-  | "chat-biasa"
-  | "proposal-penelitian"
-  | "riset-akademik"
-  | "hasil-penelitian";
+  | "gpt-5-5"
+  | "gemini-3-5-flash"
+  | "claude-sonnet-4-6"
+  | "claude-opus-4-8"
+  | "deepseek-v4-pro"
+  | "deepseek-v4-flash"
+  | "gpt-4o"
+  | "qwen-3-6-plus"
+  | "qwen-3-7-max";
 
 export const MODELS: { id: ModelId; label: string; desc: string }[] = [
-  { id: "chat-biasa", label: "Chat Biasa", desc: "Percakapan umum dengan DOSEN" },
-  { id: "proposal-penelitian", label: "Proposal Penelitian", desc: "Bantu susun dan revisi proposal" },
-  { id: "riset-akademik", label: "Riset Akademik", desc: "Cari referensi dan rangkuman jurnal" },
-  { id: "hasil-penelitian", label: "Hasil Penelitian", desc: "Analisis dan diskusi hasil riset" },
+  { id: "gpt-5-5", label: "GPT-5.5", desc: "Model canggih untuk penalaran kompleks" },
+  { id: "gemini-3-5-flash", label: "Gemini 3.5 Flash", desc: "Model cepat dan efisien untuk tugas umum" },
+  { id: "claude-sonnet-4-6", label: "Claude Sonnet 4.6", desc: "Model seimbang untuk penulisan dan analisis" },
+  { id: "claude-opus-4-8", label: "Claude Opus 4.8", desc: "Model premium untuk tugas berat" },
+  { id: "deepseek-v4-pro", label: "DeepSeek V4 Pro", desc: "Model reasoning untuk kode dan matematika" },
+  { id: "deepseek-v4-flash", label: "DeepSeek V4 Flash", desc: "Model ringan dengan latensi rendah" },
+  { id: "gpt-4o", label: "GPT-4o", desc: "Model serbaguna untuk multimodal" },
+  { id: "qwen-3-6-plus", label: "Qwen3.6 Plus", desc: "Model kuat untuk berbagai bahasa" },
+  { id: "qwen-3-7-max", label: "Qwen3.7 Max", desc: "Model unggulan untuk performa tinggi" },
 ];
 
 export const CATEGORIES = ["About", "Panduan", "Journals", "Event"] as const;
@@ -62,7 +72,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [mode, setMode] = useState<ChatMode>("cari");
-  const [model, setModel] = useState<ModelId>("chat-biasa");
+  const [model, setModel] = useState<ModelId>("gpt-5-5");
   const [category, setCategory] = useState<Category>("About");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [docs, setDocs] = useState<AttachedDoc[]>([]);
