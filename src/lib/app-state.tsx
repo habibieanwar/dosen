@@ -70,6 +70,9 @@ type State = {
   model: ModelId;
   setModel: (m: ModelId) => void;
 
+  feature: FeatureId;
+  setFeature: (f: FeatureId) => void;
+
   category: Category;
   setCategory: (c: Category) => void;
 
