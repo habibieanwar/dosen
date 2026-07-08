@@ -17,7 +17,7 @@ const ITEMS: Item[] = [
 ];
 
 export function SidebarContent({ collapsed = false }: { collapsed?: boolean }) {
-  const { toggleSidebar, resetChat } = useAppState();
+  const { toggleSidebar, resetChat, setLoginOpen } = useAppState();
 
   return (
     <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground">
