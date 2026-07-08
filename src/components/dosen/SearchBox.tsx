@@ -128,6 +128,7 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
                   <span className="font-medium">{f.label}</span>
                   {feature === f.id && <Check className="ml-auto h-4 w-4" />}
                 </div>
+                <span className="text-xs text-muted-foreground">{f.desc}</span>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
