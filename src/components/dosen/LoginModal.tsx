@@ -1,14 +1,10 @@
-import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Logo } from "./Logo";
 import { useAppState } from "@/lib/app-state";
 
 export function LoginModal() {
   const { loginOpen, setLoginOpen } = useAppState();
-  const [email, setEmail] = useState("");
-  const valid = /.+@.+\..+/.test(email);
 
   return (
     <Dialog open={loginOpen} onOpenChange={setLoginOpen}>
@@ -24,26 +20,10 @@ export function LoginModal() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <Button className="h-11 w-full rounded-full">
-              <GoogleIcon />
-              Lanjutkan dengan Google
-            </Button>
-          </div>
-
-
-          <div className="flex flex-col gap-2">
-            <Input
-              type="email"
-              placeholder="Masukkan email Anda"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="h-11 rounded-full border-border px-4"
-            />
-            <Button disabled={!valid} className="h-11 w-full rounded-full">
-              Lanjutkan dengan email
-            </Button>
-          </div>
+          <Button className="h-11 w-full rounded-full">
+            <GoogleIcon />
+            Lanjutkan dengan Google
+          </Button>
 
           <button className="text-center text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
             Single sign-on (SSO)
