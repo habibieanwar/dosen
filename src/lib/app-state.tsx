@@ -14,7 +14,7 @@ export type ModelId =
   | "qwen-3-7-max";
 
 export const MODELS: { id: ModelId; label: string; desc: string }[] = [
-  { id: "free", label: "free", desc: "Model default gratis" },
+  { id: "free", label: "Free", desc: "Model default gratis" },
   { id: "gpt-5-5", label: "GPT-5.5", desc: "OpenAI GPT-5.5" },
   { id: "gemini-3-5-flash", label: "Gemini 3.5 Flash", desc: "Google Gemini 3.5 Flash" },
   { id: "claude-sonnet-4-6", label: "Claude Sonnet 4.6", desc: "Anthropic Claude Sonnet 4.6" },

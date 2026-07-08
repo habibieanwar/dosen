@@ -110,7 +110,7 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
-              <span className="hidden sm:inline">Model:</span>
+              <span className="hidden sm:inline">Skill:</span>
               <span className="font-medium text-foreground">{modelLabel}</span>
               <ChevronDown className="h-3.5 w-3.5" />
             </button>
