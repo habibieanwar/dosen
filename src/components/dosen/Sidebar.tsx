@@ -1,6 +1,7 @@
 import {
   Plus,
   History,
+  GraduationCap,
   PanelLeftClose,
   PanelLeftOpen,
   type LucideIcon,
@@ -12,7 +13,8 @@ import { cn } from "@/lib/utils";
 type Item = { key: string; label: string; icon: LucideIcon; primary?: boolean };
 
 const ITEMS: Item[] = [
-  { key: "baru", label: "Baru", icon: Plus, primary: true },
+  { key: "baru", label: "Chat Baru", icon: Plus, primary: true },
+  { key: "dibimbing", label: "Dibimbing Dosen", icon: GraduationCap },
   { key: "riwayat", label: "Riwayat", icon: History },
 ];
 
