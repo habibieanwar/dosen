@@ -159,7 +159,7 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
             size="icon"
             onClick={send}
             disabled={!text.trim()}
-            className="h-9 w-9 shrink-0 rounded-full bg-black text-white shadow-md shadow-black/25 hover:bg-black/90 disabled:bg-black/60 disabled:opacity-100"
+            className="h-9 w-9 shrink-0 rounded-full bg-black text-white shadow-lg shadow-black/40 hover:bg-black/90 disabled:bg-black disabled:opacity-100"
             aria-label="Kirim"
           >
             <ArrowUp className="h-4 w-4" />
