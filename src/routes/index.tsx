@@ -59,10 +59,6 @@ function Home() {
             <SearchBox />
           </div>
         </div>
-
-        <div className="mt-8">
-          <FeatureCards />
-        </div>
       </div>
     </div>
   );
