@@ -6,7 +6,6 @@ import {
   ImagePlus,
   Wand2,
   Globe,
-  BookOpen,
   Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -101,10 +100,6 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
             <DropdownMenuItem onSelect={() => handleAction("Pencarian di website")}>
               <Globe className="h-4 w-4" />
               <span>Pencarian di website</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => handleAction("Riset lebih dalam")}>
-              <BookOpen className="h-4 w-4" />
-              <span>Riset lebih dalam</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
