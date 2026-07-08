@@ -41,7 +41,7 @@ export function TopBar() {
 
       <Button
         size="sm"
-        className="shrink-0 rounded-full bg-foreground text-background hover:bg-foreground/90"
+        className="shrink-0 rounded-full bg-black text-white hover:bg-neutral-900 hover:shadow-lg hover:shadow-black/25"
         onClick={() => setLoginOpen(true)}
       >
         Masuk

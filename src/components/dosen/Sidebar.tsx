@@ -79,7 +79,7 @@ export function SidebarContent({ collapsed = false }: { collapsed?: boolean }) {
 
       <div className="mt-auto p-4">
         {!collapsed && (
-          <div className="rounded-xl border border-sidebar-border bg-background/50 p-3">
+          <div className="rounded-xl border border-sidebar-border bg-background/50 p-3 text-center">
             <p className="text-xs font-medium text-foreground">Masuk</p>
           </div>
         )}
