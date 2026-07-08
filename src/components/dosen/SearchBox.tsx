@@ -6,7 +6,6 @@ import {
   ImagePlus,
   Wand2,
   Globe,
-  BookOpen,
   Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
