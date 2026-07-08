@@ -138,7 +138,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
           },
         ]),
     }),
-    [sidebarCollapsed, mobileOpen, loginOpen, mode, model, category, messages, docs],
+    [sidebarCollapsed, mobileOpen, loginOpen, mode, model, feature, category, messages, docs],
   );
 
   return <AppStateCtx.Provider value={value}>{children}</AppStateCtx.Provider>;
