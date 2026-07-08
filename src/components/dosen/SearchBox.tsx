@@ -134,9 +134,7 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
 
         <button className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm bg-black text-white transition-colors hover:bg-black/90">
           <span className="hidden sm:inline">Skill:</span>
-          <span className="font-medium text-white">
-            {model === "chat-biasa" ? "Free" : modelLabel}
-          </span>
+          <span className="font-medium text-white">Free</span>
         </button>
 
         <div className="ml-auto flex items-center gap-2">
