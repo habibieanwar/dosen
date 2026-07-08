@@ -1,10 +1,9 @@
 import { Menu } from "lucide-react";
 import { CATEGORIES, useAppState } from "@/lib/app-state";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 
 export function TopBar() {
-  const { category, setCategory, setMobileOpen, setLoginOpen } = useAppState();
+  const { category, setCategory, setMobileOpen } = useAppState();
 
   return (
     <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-border/60 bg-background/80 px-4 py-3 backdrop-blur md:px-6">
