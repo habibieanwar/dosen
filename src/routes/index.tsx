@@ -46,7 +46,7 @@ function Home() {
       <div className="w-full max-w-3xl -mt-6 md:-mt-10">
         <div className="flex flex-col items-center text-center">
           <h1 className="font-display whitespace-nowrap text-3xl leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-            Ingin tanya dosen?
+            Ingin tanya Dosen?
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
             Asisten akademik AI untuk mahasiswa, dosen, dan peneliti
