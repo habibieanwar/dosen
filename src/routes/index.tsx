@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AppStateProvider, useAppState } from "@/lib/app-state";
 import { AppShell } from "@/components/dosen/AppShell";
 import { SearchBox } from "@/components/dosen/SearchBox";
-import { FeatureCards } from "@/components/dosen/FeatureCards";
 import { ChatView } from "@/components/dosen/ChatView";
 import { DocumentAttachedList } from "@/components/dosen/DocumentAttachedCard";
 
@@ -59,10 +58,6 @@ function Home() {
           <div className="mt-2">
             <SearchBox />
           </div>
-        </div>
-
-        <div className="mt-8">
-          <FeatureCards />
         </div>
       </div>
     </div>
